@@ -1,0 +1,300 @@
+.login-container {
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: white;
+}
+
+/* Starry Background */
+.bg-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 100px 150px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 200px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 300px 250px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 450px 120px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 500px 400px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 600px 600px;
+    opacity: 0.3;
+    animation: starPulse 10s infinite linear;
+}
+
+@keyframes starPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+}
+
+/* Floating Icons */
+.floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.floating-icons .icon {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.15);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+.float-1 { top: 15%; left: 10%; animation: float 12s infinite ease-in-out; }
+.float-2 { top: 70%; left: 15%; animation: float 15s infinite reverse ease-in-out; }
+.float-3 { top: 20%; right: 12%; animation: float 18s infinite ease-in-out; }
+.float-4 { top: 80%; right: 10%; animation: float 14s infinite alternate ease-in-out; }
+.float-5 { top: 50%; left: 5%; animation: float 20s infinite ease-in-out; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+}
+
+/* Glass Card */
+.login-card-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    animation: cardEnter 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cardEnter {
+    from { opacity: 0; transform: scale(0.9) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.login-card {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: 2.5rem;
+}
+
+.header-logo {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+}
+
+.header-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+}
+
+/* Auth Tabs */
+.auth-tab-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    color: #94a3b8;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.auth-tab.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.login-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.form-input-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+}
+
+.glass-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 0 1rem;
+    transition: all 0.3s ease;
+}
+
+.glass-input-wrapper:focus-within {
+    border-color: #2dd4bf;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.1);
+}
+
+.input-icon {
+    color: #64748b;
+    margin-right: 0.75rem;
+}
+
+.glass-input-wrapper input {
+    width: 100%;
+    padding: 1rem 0;
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 1rem;
+}
+
+.glass-input-wrapper input::placeholder {
+    color: #475569;
+}
+
+/* Teal Gradient Button */
+.teal-gradient-btn {
+    background: linear-gradient(135deg, #0ea5e9 0%, #2dd4bf 100%);
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1rem;
+}
+
+.teal-gradient-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 15px -3px rgba(45, 212, 191, 0.3);
+}
+
+.forgot-password {
+    text-align: center;
+}
+
+.forgot-password a {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: white;
+}
+
+/* Role Grid */
+.role-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.role-item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.role-item-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+}
+
+.role-item-card.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #2dd4bf;
+    box-shadow: 0 0 15px rgba(45, 212, 191, 0.1);
+}
+
+.role-icon {
+    color: #94a3b8;
+    transition: color 0.3s ease;
+}
+
+.role-item-card.active .role-icon {
+    color: #2dd4bf;
+}
+
+.role-item-card span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.role-item-card.active span {
+    color: white;
+}
+
+/* Feature Footer */
+.feature-footer {
+    margin-top: 2rem;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.check-icon {
+    color: #2dd4bf;
+}

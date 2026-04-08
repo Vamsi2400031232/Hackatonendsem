@@ -1,0 +1,277 @@
+.assignment-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border: 1px solid var(--secondary-200);
+    border-radius: var(--radius-md);
+    padding: 0 var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--secondary-400);
+    transition: var(--transition-normal);
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-400);
+    box-shadow: 0 0 0 3px var(--primary-50);
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    padding: var(--space-3) 0;
+    width: 100%;
+    font-family: inherit;
+    color: var(--secondary-900);
+    outline: none;
+}
+
+.filter-tabs {
+    display: flex;
+    background: var(--secondary-200);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    gap: 2px;
+}
+
+.filter-tabs button {
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--secondary-600);
+}
+
+.filter-tabs button.active {
+    background: white;
+    color: var(--primary-600);
+    box-shadow: var(--shadow-sm);
+}
+
+.assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+}
+
+.assignment-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--secondary-100);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.assignment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-400);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.assignment-card:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    color: var(--danger-500);
+    background: var(--danger-50);
+    transform: scale(1.1);
+}
+
+.delete-confirmation-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: var(--radius-lg);
+    animation: fadeInConfirmation 0.2s ease;
+}
+
+@keyframes fadeInConfirmation {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.confirmation-content {
+    text-align: center;
+    padding: var(--space-4);
+}
+
+.confirmation-content p {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    color: white;
+}
+
+.confirmation-buttons {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+}
+
+.confirmation-buttons button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.confirm-yes {
+    background: var(--danger-500);
+    color: white;
+    border: none;
+}
+
+.confirm-yes:hover {
+    background: var(--danger-600);
+    transform: translateY(-1px);
+}
+
+.confirm-no {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.confirm-no:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.course-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-500);
+    background: var(--primary-50);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.assignment-title {
+    font-size: 1.25rem;
+    color: var(--secondary-900);
+    font-family: var(--font-heading);
+    margin: var(--space-1) 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--secondary-50);
+}
+
+.due-date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.875rem;
+    color: var(--secondary-500);
+}
+
+.due-date.overdue {
+    color: var(--danger-500);
+    font-weight: 600;
+}
+
+.points-tag {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--secondary-600);
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-12);
+    color: var(--secondary-400);
+    font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+    .search-box {
+        background: var(--secondary-800);
+        border-color: var(--secondary-700);
+    }
+
+    .search-box input {
+        color: white;
+    }
+
+    .filter-tabs {
+        background: var(--secondary-700);
+    }
+
+    .filter-tabs button.active {
+        background: var(--secondary-600);
+        color: white;
+    }
+
+    .assignment-card {
+        background: var(--secondary-800);
+        border-color: var(--secondary-700);
+    }
+
+    .assignment-title {
+        color: white;
+    }
+}

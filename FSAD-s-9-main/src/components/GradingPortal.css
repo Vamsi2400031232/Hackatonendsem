@@ -1,0 +1,160 @@
+.grading-portal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.portal-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portal-header h1 {
+    font-size: 1.8rem;
+    color: var(--secondary-900);
+}
+
+.portal-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.submission-list h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--secondary-400);
+    margin-bottom: var(--space-4);
+    letter-spacing: 0.05em;
+}
+
+.submission-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: white;
+    border: 1px solid var(--secondary-100);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-2);
+    cursor: pointer;
+}
+
+.submission-item.active {
+    border-color: var(--primary-500);
+    background: var(--primary-50);
+}
+
+.stu-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--secondary-100);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-500);
+}
+
+.submission-item.active .stu-avatar {
+    background: var(--primary-100);
+    color: var(--primary-600);
+}
+
+.stu-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stu-name {
+    font-weight: 700;
+    color: var(--secondary-900);
+}
+
+.stu-date {
+    font-size: 0.75rem;
+    color: var(--secondary-400);
+}
+
+.file-preview-card {
+    margin-bottom: var(--space-6);
+}
+
+.file-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--secondary-50);
+}
+
+.file-icon {
+    color: var(--primary-500);
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-info h4 {
+    margin-bottom: 2px;
+}
+
+.file-info span {
+    font-size: 0.8rem;
+    color: var(--secondary-400);
+}
+
+.mock-file-content {
+    margin-top: var(--space-6);
+    height: 300px;
+    background: var(--secondary-50);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-400);
+    font-style: italic;
+    border: 1px dashed var(--secondary-200);
+}
+
+.grading-form-card h3 {
+    margin-bottom: var(--space-6);
+}
+
+.submit-grade {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+}
+
+@media (max-width: 900px) {
+    .portal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .submission-item {
+        background: var(--secondary-800);
+        border-color: var(--secondary-700);
+    }
+
+    .stu-name {
+        color: white;
+    }
+
+    .mock-file-content {
+        background: var(--secondary-900);
+        border-color: var(--secondary-700);
+    }
+
+    .portal-header h1 {
+        color: white;
+    }
+}
