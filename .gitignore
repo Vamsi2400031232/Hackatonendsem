@@ -1,0 +1,23 @@
+# Root .gitignore for FSAD Project
+
+# Frontend ignores
+FSAD-s-9-main/node_modules/
+FSAD-s-9-main/dist/
+FSAD-s-9-main/dist-ssr/
+FSAD-s-9-main/*.local
+FSAD-s-9-main/.env*
+
+# Backend ignores
+backend/target/
+backend/.settings/
+backend/.classpath
+backend/.project
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Common ignores
+.DS_Store
+.vscode/
+.idea/
+*.log
+node_modules/
+bin/
