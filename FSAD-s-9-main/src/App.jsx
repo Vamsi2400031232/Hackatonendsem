@@ -42,22 +42,32 @@ const AppContent = () => {
         setView(user.role === 'teacher' ? 'grade' : 'detail');
     };
 
-    const handleCreateAssignment = async (newAssignment) => {
+    const handleSaveAssignment = async (assignmentData) => {
+        const isEdit = !!assignmentData.id;
+        const url = isEdit 
+            ? `http://localhost:8080/api/assignments/${assignmentData.id}` 
+            : 'http://localhost:8080/api/assignments';
+        const method = isEdit ? 'PUT' : 'POST';
+
         try {
-            const response = await fetch('http://localhost:8080/api/assignments', {
-                method: 'POST',
+            const response = await fetch(url, {
+                method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newAssignment)
+                body: JSON.stringify(assignmentData)
             });
             if (response.ok) {
                 const savedAssignment = await response.json();
-                setAssignments([savedAssignment, ...assignments]);
+                if (isEdit) {
+                    setAssignments(assignments.map(a => a.id === savedAssignment.id ? savedAssignment : a));
+                } else {
+                    setAssignments([savedAssignment, ...assignments]);
+                }
                 setView('dashboard');
             } else {
-                alert("Failed to create assignment on server");
+                alert(`Failed to ${isEdit ? 'update' : 'create'} assignment on server`);
             }
         } catch (error) {
-            console.error("Error creating assignment:", error);
+            console.error(`Error ${isEdit ? 'updating' : 'creating'} assignment:`, error);
             alert("Error connecting to server");
         }
     };
@@ -101,7 +111,8 @@ const AppContent = () => {
                             assignments={assignments}
                             selectedAssignment={selectedAssignment}
                             onSelect={handleSelectAssignment}
-                            onSave={handleCreateAssignment}
+                            onEdit={(a) => { setSelectedAssignment(a); setView('edit'); }}
+                            onSave={handleSaveAssignment}
                             onDelete={handleDeleteAssignment}
                         />
                     )}
@@ -166,9 +177,13 @@ const StudentPortal = ({ view, setView, assignments, selectedAssignment, onSelec
     );
 };
 
-const TeacherPortal = ({ view, setView, assignments, selectedAssignment, onSelect, onSave, onDelete }) => {
-    if (view === 'create') {
-        return <AssignmentCreator onCancel={() => setView('dashboard')} onSave={onSave} />;
+const TeacherPortal = ({ view, setView, assignments, selectedAssignment, onSelect, onSave, onDelete, onEdit }) => {
+    if (view === 'create' || view === 'edit') {
+        return <AssignmentCreator 
+            onCancel={() => setView('dashboard')} 
+            onSave={onSave} 
+            assignment={view === 'edit' ? selectedAssignment : null} 
+        />;
     }
 
     if (view === 'grade') {
@@ -190,6 +205,7 @@ const TeacherPortal = ({ view, setView, assignments, selectedAssignment, onSelec
                 assignments={assignments}
                 onSelect={onSelect}
                 onDelete={onDelete}
+                onEdit={onEdit}
             />
         </div>
     );

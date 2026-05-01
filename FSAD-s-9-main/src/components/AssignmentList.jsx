@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Calendar, BookOpen, Clock, AlertCircle, Trash2, X, Check } from 'lucide-react';
+import { Search, Calendar, BookOpen, Clock, AlertCircle, Trash2, Edit2, X, Check } from 'lucide-react';
 import './AssignmentList.css';
 
-const AssignmentList = ({ onSelect, assignments, initialFilter = 'all', onDelete }) => {
+const AssignmentList = ({ onSelect, assignments, initialFilter = 'all', onDelete, onEdit }) => {
     const [filter, setFilter] = useState(initialFilter);
     const [search, setSearch] = useState('');
     const [confirmingDelete, setConfirmingDelete] = useState(null);
@@ -67,6 +67,18 @@ const AssignmentList = ({ onSelect, assignments, initialFilter = 'all', onDelete
                                         title="Delete Assignment"
                                     >
                                         <Trash2 size={16} />
+                                    </button>
+                                )}
+                                {onEdit && (
+                                    <button 
+                                        className="edit-btn"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onEdit(assignment);
+                                        }}
+                                        title="Edit Assignment"
+                                    >
+                                        <Edit2 size={16} />
                                     </button>
                                 )}
                                 {getStatusBadge(assignment.status)}

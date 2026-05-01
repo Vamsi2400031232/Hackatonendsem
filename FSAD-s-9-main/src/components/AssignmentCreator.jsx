@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Plus, X, Calendar, FileText, Target } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Edit3, X, Calendar, FileText, Target } from 'lucide-react';
 import './AssignmentCreator.css';
 
-const AssignmentCreator = ({ onCancel, onSave }) => {
+const AssignmentCreator = ({ onCancel, onSave, assignment }) => {
     const [formData, setFormData] = useState({
         title: '',
         course: '',
@@ -11,15 +11,27 @@ const AssignmentCreator = ({ onCancel, onSave }) => {
         description: ''
     });
 
+    useEffect(() => {
+        if (assignment) {
+            setFormData({
+                title: assignment.title || '',
+                course: assignment.course || '',
+                dueDate: assignment.dueDate || '',
+                points: assignment.points || 100,
+                description: assignment.description || ''
+            });
+        }
+    }, [assignment]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave({ ...formData, status: 'pending' });
+        onSave({ ...formData, id: assignment?.id, status: assignment?.status || 'pending' });
     };
 
     return (
         <div className="creator-container card">
             <div className="creator-header">
-                <h2>Create New Assignment</h2>
+                <h2>{assignment ? 'Edit Assignment' : 'Create New Assignment'}</h2>
                 <button className="close-btn" onClick={onCancel}><X size={24} /></button>
             </div>
 
@@ -28,7 +40,7 @@ const AssignmentCreator = ({ onCancel, onSave }) => {
                     <div className="form-group flex-2">
                         <label>Assignment Title</label>
                         <div className="input-with-icon">
-                            <Plus size={18} />
+                            {assignment ? <Edit3 size={18} /> : <Plus size={18} />}
                             <input
                                 type="text"
                                 required
@@ -90,7 +102,9 @@ const AssignmentCreator = ({ onCancel, onSave }) => {
 
                 <div className="form-actions">
                     <button type="button" className="btn-secondary" onClick={onCancel}>Cancel</button>
-                    <button type="submit" className="btn-primary">Create Assignment</button>
+                    <button type="submit" className="btn-primary">
+                        {assignment ? 'Update Assignment' : 'Create Assignment'}
+                    </button>
                 </div>
             </form>
         </div>
